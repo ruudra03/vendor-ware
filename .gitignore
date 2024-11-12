@@ -1,2 +1,11 @@
 # ignore git
 .git
+
+# ignore npm packages
+node_modules
+
+# ignore distribution folder
+vendor
+
+# ignore tests
+tests
