@@ -1,19 +1,19 @@
 import Hapi, { Server } from "@hapi/hapi";
 
-let vendor: Server;
+let server: Server;
 
 export const init = async (): Promise<Server> => {
-  vendor = Hapi.server({
+  server = Hapi.server({
     port: process.env.PORT || 8080,
     host: "localhost",
   });
 
-  vendor.ext("onRequest", (request, h) => {
-    console.log("vendor requested");
+  server.ext("onRequest", (request, h) => {
+    console.log(`vendor perform ${request.method} on ${request.url}`);
     return h.continue;
   });
 
-  vendor.route({
+  server.route({
     method: "GET",
     path: "/",
     handler: (request, h) => {
@@ -21,19 +21,21 @@ export const init = async (): Promise<Server> => {
     },
   });
 
-  return vendor;
+  return server;
 };
 
 export const start = async (): Promise<void> => {
-  await vendor.start();
+  await server.start();
   console.log(
-    `vendor server running on ${vendor.settings.host}:${vendor.settings.port}`
+    `vendor running on ${server.settings.host}:${server.settings.port}`
   );
 };
 
 process.on("unhandledRejection", (err) => {
-  console.log("vendor server 'unhandledRejection' error");
+  console.log("vendor 'unhandledRejection' error");
   console.log(err);
   console.log("vendor exit");
   process.exit(1);
 });
+
+init().then(() => start());
