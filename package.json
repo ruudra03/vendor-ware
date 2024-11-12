@@ -1,9 +1,10 @@
 {
-  "name": "vendor-ware-pkg",
-  "version": "0.1.1",
+  "name": "vendor-ware",
+  "version": "0.1.2",
   "description": "api for all ;)",
   "author": "ruudra03",
   "license": "MIT",
+  "git-repository": "https://github.com/ruudra03/vendor-ware.git",
   "main": "vendor/main.js",
   "scripts": {
     "dev:tsc": "tsc --watch -p .",
