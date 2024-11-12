@@ -1,12 +1,11 @@
 {
-  "name": "@ruudra03/vendor-ware",
-  "version": "0.1.4",
+  "name": "vendor-ware",
+  "version": "0.2.0",
   "description": "api for all ;)",
   "author": "ruudra03",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ruudra03/vendor-ware.git"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "main": "vendor/main.js",
   "scripts": {

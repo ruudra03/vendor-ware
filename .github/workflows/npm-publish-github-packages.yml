@@ -5,33 +5,25 @@ name: Node.js Package
 
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm ci
-      - run: npm test
-
-  publish-gpr:
-    needs: build
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
-          scope: '@ruudra03'
-      - run: npm ci
+          node-version: 16
+      - run: npm install
+      # - run: npm run build
+      - run: |
+          echo @ruudra03:https://npm.pkg.github.com/ > ./.npmrc
+          echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> ./.npmrc
       - run: npm publish
+        working-directory: ./
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GHP_REGISTRY_TOKEN}}
+          NPM_TOKEN: ${{ secrets.GHP_REGISTRY_TOKEN }}
