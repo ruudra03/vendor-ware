@@ -9,3 +9,6 @@ vendor
 
 # ignore tests
 tests
+
+# ignore environment files
+.env
